@@ -1,12 +1,27 @@
-import re
+from ipaddress import ip_address
 from urllib.parse import urlsplit
 
 
-_IPV4_PATTERN = re.compile(
-    r"^(?:(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\.){3}"
-    r"(?:25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])$"
+_SUSPICIOUS_KEYWORDS = (
+    "login",
+    "verify",
+    "update",
+    "secure",
+    "bank",
+    "account",
+    "signin",
 )
-_SUSPICIOUS_KEYWORDS = ("login", "verify", "update", "secure", "bank", "account", "signin")
+
+
+def _is_ip_address(hostname: str | None) -> bool:
+    if not hostname:
+        return False
+
+    try:
+        ip_address(hostname)
+        return True
+    except ValueError:
+        return False
 
 
 def extract_features(url: str) -> dict:
@@ -23,7 +38,7 @@ def extract_features(url: str) -> dict:
         "dot_count": url.count("."),
         "has_at": int("@" in url),
         "uses_https": int(scheme == "https"),
-        "has_ip": int(bool(hostname and _IPV4_PATTERN.fullmatch(hostname))),
+        "has_ip": int(_is_ip_address(hostname)),
         "has_suspicious_keyword": int(
             any(keyword in url.lower() for keyword in _SUSPICIOUS_KEYWORDS)
         ),
