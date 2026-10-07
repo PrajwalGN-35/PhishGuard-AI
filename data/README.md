@@ -1,6 +1,6 @@
 ﻿# PhishGuard AI Dataset
 Source: Kaggle - Phishing Site URLs
-Dataset owner: taruntiwarihp
+Owner: taruntiwarihp
 Dataset slug: phishing-site-urls
 File: phishing_site_urls.csv
 Columns:
@@ -9,4 +9,4 @@ Columns:
 Labels:
 - bad = phishing/malicious
 - good = legitimate/non-phishing
-Verified local rows: 549361
+Verified local data rows: 549361
