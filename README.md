@@ -1,74 +1,124 @@
 # PhishGuard AI
 
+## Live Application
+
+PhishGuard AI is deployed and available as a live Streamlit application.
+
+Live Demo
+
+https://phishguard-ai-ho5hql5sepq4dbwxgo2dod.streamlit.app/
+
 ## Project Overview
 
 PhishGuard AI is a machine learning based phishing URL detection system designed to identify potentially malicious URLs and classify them as safe or phishing.
 
-The system uses six URL based features including URL length, number of dots, presence of the at symbol, HTTPS usage, presence of an IP address, and suspicious keyword detection.
+The system analyzes URL characteristics using six predefined features and applies machine learning models to determine whether a URL is likely to be legitimate or phishing.
 
-Two machine learning models, Decision Tree and Random Forest, are trained and evaluated using the same feature set. The models are compared using accuracy, precision, recall, F1 score, and confusion matrix.
-
-The Random Forest model is integrated into a Streamlit application that allows users to enter a URL and receive a real time prediction.
+The project combines data preprocessing, feature engineering, machine learning model development, model evaluation, and real time prediction through a Streamlit web application.
 
 ## Problem Statement
 
-Phishing attacks use deceptive URLs to trick users into visiting malicious websites and revealing sensitive information. Traditional detection methods may require external services or complex security infrastructure.
+Phishing attacks commonly use deceptive and malicious URLs to trick users into visiting fraudulent websites and providing sensitive information.
 
-PhishGuard AI provides a lightweight machine learning based approach that analyzes URL characteristics and identifies potentially phishing URLs.
+The objective of this project is to develop a lightweight machine learning based solution that can analyze URL characteristics and classify URLs as safe or phishing without depending on external security APIs.
 
-## Solution
+## Proposed Solution
 
-The system follows a structured machine learning pipeline.
+PhishGuard AI follows a structured machine learning pipeline.
 
-The dataset is cleaned and prepared for training.
+A labelled URL dataset is prepared and processed for model training.
 
-Six relevant URL features are extracted from every URL.
+Six URL based features are extracted from each URL.
 
-The dataset is divided into training and testing sets.
+The processed dataset is divided into training and testing data.
 
-Decision Tree and Random Forest models are trained using the extracted features.
+Decision Tree and Random Forest classification models are trained using the extracted features.
 
-Both models are evaluated using standard classification metrics.
+The models are evaluated using accuracy, precision, recall, F1 score, and confusion matrix.
 
-The Random Forest model is integrated into the Streamlit application for real time prediction.
+The Random Forest model is integrated into a Streamlit application for real time URL classification.
 
-## Features
+## URL Features
 
-URL length
+The system uses exactly six features.
 
-Number of dots
+URL Length
 
-Presence of the at symbol
+Number of Dots
 
-HTTPS usage
+Presence of the At Symbol
 
-Presence of an IP address
+HTTPS Usage
 
-Suspicious keyword detection
+Presence of an IP Address
+
+Suspicious Keyword Detection
+
+These features are extracted consistently during both model training and real time prediction.
 
 ## Machine Learning Models
+
+The project implements two classification algorithms.
 
 Decision Tree
 
 Random Forest
 
-The Random Forest model is used for the final Streamlit demonstration because it provides slightly better overall evaluation results than the Decision Tree model on the selected dataset.
+Both models are trained using the same six URL based features and evaluated on the same test dataset.
+
+Random Forest is selected for the final application because it achieved slightly better overall performance during evaluation.
+
+## Model Performance
+
+Decision Tree
+
+Accuracy: 82.52 percent
+
+Precision: 76.77 percent
+
+Recall: 93.21 percent
+
+F1 Score: 84.19 percent
+
+Confusion Matrix: 24425, 9575, 2305, 31640
+
+Random Forest
+
+Accuracy: 82.54 percent
+
+Precision: 76.77 percent
+
+Recall: 93.27 percent
+
+F1 Score: 84.22 percent
+
+Confusion Matrix: 24420, 9580, 2285, 31660
+
+The Random Forest model is used by the deployed Streamlit application.
 
 ## Dataset
 
 The project uses the URL Phishing Detection Dataset from Hassan Albattra.
 
-The final dataset contains approximately 340000 URLs with balanced legitimate and phishing classes.
+The final dataset contains approximately 340000 URLs with legitimate and phishing URL samples.
 
-The dataset is processed using Python and pandas before model training.
+The dataset is processed using Python and pandas before feature extraction and model training.
 
-## Model Performance
+## Application Workflow
 
-Decision Tree achieved an accuracy of 82.52 percent with an F1 score of 84.19 percent.
+The user enters a URL into the Streamlit application.
 
-Random Forest achieved an accuracy of 82.54 percent with an F1 score of 84.22 percent.
+The application extracts the six predefined URL features.
 
-The Random Forest model achieved slightly better overall performance and is therefore used in the application.
+The extracted features are converted into the required model input format.
+
+The trained Random Forest model analyzes the feature vector.
+
+The model generates a classification result.
+
+The application displays the prediction as Safe or Phishing.
+
+The extracted feature values can also be viewed by the user.
 
 ## Technology Stack
 
@@ -80,7 +130,9 @@ Scikit learn
 
 Streamlit
 
-Git and GitHub
+Git
+
+GitHub
 
 ## Project Structure
 
@@ -88,21 +140,21 @@ PhishGuard AI
 
 app.py
 
-feature extraction.py
+feature_extraction.py
 
 requirements.txt
 
 models
 
-decision tree.pkl
+decision_tree.pkl
 
-random forest.pkl
+random_forest.pkl
 
-MODEL REPORT.md
+MODEL_REPORT.md
 
 data
 
-phishing URL dataset.csv
+phishing_url_dataset.csv
 
 README.md
 
@@ -112,37 +164,77 @@ Clone the repository.
 
 Open the project directory.
 
-Create and activate a Python virtual environment if required.
+Create and activate a Python virtual environment.
 
 Install the required dependencies using the requirements file.
 
-## Running the Application
+Example installation commands
 
-Run the Streamlit application using the following command.
+git clone https://github.com/PrajwalGN-35/PhishGuard-AI.git
+
+cd PhishGuard-AI
+
+pip install -r requirements.txt
+
+## Running Locally
+
+Start the Streamlit application using the following command.
 
 streamlit run app.py
 
-The application opens in the browser and allows the user to enter a URL for analysis.
+The application will open in the browser and provide an interface for entering URLs and obtaining predictions.
 
-## Prediction Process
+## Live Demo
 
-The user enters a URL into the application.
+The trained Random Forest model is deployed using Streamlit Community Cloud.
 
-The system extracts the six predefined URL features.
+Live Application
 
-The features are passed to the trained Random Forest model.
+https://phishguard-ai-ho5hql5sepq4dbwxgo2dod.streamlit.app/
 
-The model predicts whether the URL is safe or phishing.
+Users can enter a URL directly into the application and view the model prediction.
 
-The prediction and extracted features are displayed in the application.
+## Example Predictions
+
+A legitimate website such as a standard HTTPS website can be classified as Safe.
+
+A URL containing an IP address, suspicious keywords, or other phishing related characteristics can be classified as Phishing.
+
+The prediction is based only on the six features used by the trained model.
+
+## Key Project Highlights
+
+Machine learning based cybersecurity solution
+
+Two classification models implemented and compared
+
+Six interpretable URL based features
+
+Model evaluation using multiple classification metrics
+
+Real time URL prediction
+
+Streamlit based user interface
+
+Live cloud deployment
+
+GitHub based project management
 
 ## Project Objective
 
-The objective of PhishGuard AI is to demonstrate how machine learning can be applied to cybersecurity problems using interpretable URL based features and a simple real time prediction interface.
+The primary objective of PhishGuard AI is to demonstrate how machine learning and feature engineering can be applied to a practical cybersecurity problem.
+
+The project focuses on building an understandable and lightweight phishing detection pipeline that connects dataset preparation, feature extraction, machine learning, evaluation, and real time deployment.
+
+## Future Scope
+
+The system can be extended in future with additional URL and webpage characteristics, larger and continuously updated datasets, advanced machine learning models, automated threat intelligence integration, and browser based protection mechanisms.
+
+These improvements are outside the current project scope and are not required for the present implementation.
 
 ## Contributors
 
-PRAJWAL GN
+PRAJWAL G N
 
 MANOJ M N
 
@@ -152,4 +244,8 @@ S KUNDHAN RAO PAWAR
 
 ## Disclaimer
 
-PhishGuard AI is an academic and demonstration project. The predictions are based only on the URL features used during model training and should not be considered a complete cybersecurity solution.
+PhishGuard AI is an academic and demonstration project.
+
+The system makes predictions based only on the URL features used during model training. A Safe prediction does not guarantee that a website is completely secure, and a Phishing prediction should be treated as a warning rather than a definitive security verdict.
+
+The project should not be considered a replacement for professional cybersecurity tools or security analysis.
